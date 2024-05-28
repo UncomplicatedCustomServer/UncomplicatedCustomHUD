@@ -92,8 +92,11 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Config.cs" />
+        <Compile Include="Elements\PlayerGUI.cs" />
+        <Compile Include="Enums\Effect.cs" />
         <Compile Include="Events\Internal\Player.cs" />
         <Compile Include="Events\Internal\Server.cs" />
+        <Compile Include="Interfaces\IPlayerGUI.cs" />
         <Compile Include="Plugin.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
