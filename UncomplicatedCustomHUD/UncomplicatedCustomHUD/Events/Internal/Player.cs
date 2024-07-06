@@ -1,4 +1,14 @@
 ﻿using Exiled.Events.EventArgs.Player;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using UncomplicatedCustomHUD.API.Extensions;
+using UncomplicatedCustomHUD.API.Features.Hud;
+using UncomplicatedCustomHUD.API.Features.Tooltip;
+using UncomplicatedCustomHUD.API.Interfaces;
+using EventSource = Exiled.Events.Handlers.Player;
 
 namespace UncomplicatedCustomHUD.Events.Internal
 {
@@ -6,33 +16,22 @@ namespace UncomplicatedCustomHUD.Events.Internal
     {
         public static void Register()
         {
-            Exiled.Events.Handlers.Player.Joined += OnPlayerJoined;
-            Exiled.Events.Handlers.Player.Left += OnPlayerLeft;
-
-            Exiled.Events.Handlers.Player.Spawning += OnPlayerSpawn;
+            EventSource.Verified += AddComponentOnVerified;
         }
 
         public static void Unregister()
         {
-            Exiled.Events.Handlers.Player.Joined -= OnPlayerJoined;
-            Exiled.Events.Handlers.Player.Left -= OnPlayerLeft;
-
-            Exiled.Events.Handlers.Player.Spawning -= OnPlayerSpawn;
+            EventSource.Verified -= AddComponentOnVerified;
         }
 
-        public static void OnPlayerJoined(JoinedEventArgs ev)
+        private static void AddComponentOnVerified(VerifiedEventArgs ev)
         {
-            
-        }
+            var player = ev.Player;
 
-        public static void OnPlayerLeft(LeftEventArgs ev)
-        {
-            
-        }
+            player.CreateRenderer();
 
-        public static void OnPlayerSpawn(SpawningEventArgs ev)
-        {
-            
+            player.AddDisplay(new HudDisplay(player));
+            player.AddDisplay(new TooltipDisplay(player));
         }
     }
 }
