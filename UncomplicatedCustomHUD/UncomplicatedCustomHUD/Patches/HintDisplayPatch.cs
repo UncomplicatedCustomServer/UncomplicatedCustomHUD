@@ -1,11 +1,6 @@
 ﻿using Exiled.API.Features;
 using HarmonyLib;
 using Hints;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UncomplicatedCustomHUD.API.Extensions;
 using UncomplicatedCustomHUD.API.Features.Hud;
 
@@ -17,6 +12,12 @@ namespace UncomplicatedCustomHUD.Patches
         public static bool Prefix(HintDisplay __instance, Exiled.API.Features.Hint hint)
         {
             var renderer = Player.Get(__instance.gameObject).GetRenderer();
+
+            if (renderer.IsWasRenderedNow)
+            {
+                return true;
+            }
+
             renderer.GetDisplay<HudDisplay>().ShowHint(hint.Content, hint.Duration);
             renderer.Render();
 

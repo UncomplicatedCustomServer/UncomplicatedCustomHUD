@@ -112,6 +112,7 @@
     <Compile Include="Configs\Interfaces\IHudConfig.cs" />
     <Compile Include="Configs\TooltipConfig.cs" />
     <Compile Include="Events\Internal\Player.cs" />
+    <Compile Include="Patches\HintDisplayPatch.cs" />
     <Compile Include="Plugin.cs" />
   </ItemGroup>
   <ItemGroup />

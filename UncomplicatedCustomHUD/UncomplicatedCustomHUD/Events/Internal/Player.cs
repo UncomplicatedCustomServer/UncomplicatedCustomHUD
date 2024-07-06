@@ -1,13 +1,7 @@
 ﻿using Exiled.Events.EventArgs.Player;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UncomplicatedCustomHUD.API.Extensions;
 using UncomplicatedCustomHUD.API.Features.Hud;
 using UncomplicatedCustomHUD.API.Features.Tooltip;
-using UncomplicatedCustomHUD.API.Interfaces;
 using EventSource = Exiled.Events.Handlers.Player;
 
 namespace UncomplicatedCustomHUD.Events.Internal

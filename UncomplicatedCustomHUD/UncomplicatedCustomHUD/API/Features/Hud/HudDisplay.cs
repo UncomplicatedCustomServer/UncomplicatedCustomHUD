@@ -1,4 +1,5 @@
 ﻿using Exiled.API.Features;
+using Placeholders.API.Features;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,15 +43,13 @@ namespace UncomplicatedCustomHUD.API.Features.Hud
 
         public override void Display(HudDisplayItem hudDisplay)
         {
-            Log.Info(Time.time);
-            Log.Info(hudDisplay.Time);
             if (Time.time > hudDisplay.Time && hudDisplay.Time > 0)
             {
                 items.Remove(hudDisplay);
                 return;
             }
 
-            stringBuilder.AppendLine(Placeholders.API.Features.Placeholders.SetPlaceholders(Player.UserId, hudDisplay.Content));
+            stringBuilder.AppendLine(PlaceholdersAPI.SetPlaceholders(Player.UserId, hudDisplay.Content));
         }
     }
 }
