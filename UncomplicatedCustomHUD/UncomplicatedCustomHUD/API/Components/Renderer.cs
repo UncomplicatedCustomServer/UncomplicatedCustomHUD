@@ -15,15 +15,15 @@ namespace UncomplicatedCustomHUD.API.Components
     {
         public static IReadOnlyDictionary<Player, Renderer> Renderers => _renderers;
 
-        public IReadOnlyList<IDisplay<IDisplayItem>> Displays => _displays;
-
         private static Dictionary<Player, Renderer> _renderers = new();
 
-        private List<IDisplay<IDisplayItem>> _displays;
+        public IReadOnlyList<IDisplay<IDisplayItem>> Displays => _displays;
 
         public Player Owner { get; private set; }
 
         public bool IsWasRenderedNow { get; private set; }
+
+        private List<IDisplay<IDisplayItem>> _displays;
 
         private CoroutineHandle _coroutineHandle;
 
@@ -91,7 +91,14 @@ namespace UncomplicatedCustomHUD.API.Components
         {
             while (Owner.IsConnected)
             {
-                Render();
+                try
+                {
+                    Render();
+                }
+                catch (Exception e)
+                {
+                    Log.Debug(e);
+                }
 
                 yield return Timing.WaitForSeconds(Plugin.Configs.RefreshRate);
             }

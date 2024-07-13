@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PlayerRoles;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace UncomplicatedCustomHUD.Configs.Interfaces
     {
         bool IsEnabled { get; set; }
 
-        string Content { get; set; }
+        Dictionary<RoleTypeId, RoleTypeId> SameHudRoles { get; }
+
+        Dictionary<RoleTypeId, string> Content { get; set; }
     }
 }

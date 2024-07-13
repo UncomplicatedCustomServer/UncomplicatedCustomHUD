@@ -14,11 +14,6 @@ namespace UncomplicatedCustomHUD.API.Features.Hud
     {
         public HudDisplay(Player player) : base(player)
         {
-            items.Add(new HudDisplayItem()
-            {
-                Content = Plugin.Configs.HudConfig.Content,
-                Time = -1
-            });
         }
 
         public override string Name => "Hud";
@@ -30,7 +25,7 @@ namespace UncomplicatedCustomHUD.API.Features.Hud
             items.Add(new HudDisplayItem()
             {
                 Content = content,
-                Time = Time.time + duration
+                Time = duration < 0 ? duration : Time.time + duration
             });
         }
 
@@ -38,7 +33,7 @@ namespace UncomplicatedCustomHUD.API.Features.Hud
         {
             base.Display();
 
-            Player.ShowHint(stringBuilder.ToString(), Plugin.Configs.RefreshRate);
+            Player.ShowHint(stringBuilder.ToString(), Plugin.Configs.RefreshRate + 0.1f);
         }
 
         public override void Display(HudDisplayItem hudDisplay)

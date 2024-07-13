@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UncomplicatedCustomHUD.API.Components;
+using UncomplicatedCustomHUD.API.Features.Hud;
 using UncomplicatedCustomHUD.API.Interfaces;
 using UnityEngine;
 
@@ -19,6 +20,34 @@ namespace UncomplicatedCustomHUD.API.Extensions
         public static Components.Renderer GetRenderer(this Player player) => player.GameObject.GetComponent<Components.Renderer>();
 
         public static void CreateRenderer(this Player player) => player.GameObject.AddComponent<Components.Renderer>();
+
+        public static void UpdateHud(this Player player)
+        {
+            var role = player.Role.Type;
+
+            if (!Plugin.Configs.HudConfig.SameHudRoles.TryGetValue(player.Role.Type, out role))
+            {
+                role = player.Role.Type;
+            }
+
+            if (!Plugin.Configs.HudConfig.Content.TryGetValue(role, out var content))
+            {
+                Log.Error($"Not found hud for {role} role");
+                return;
+            }
+
+            var renderer = player.GetRenderer();
+            var hudDisplay = renderer.GetDisplay<HudDisplay>();
+            
+            if (hudDisplay.Items.Count == 0)
+            {
+                hudDisplay.ShowHint(content, -1);
+            }
+            else
+            {
+                hudDisplay.Items.First().Content = content;
+            }
+        }
 
         public static bool TryGetPlayerOpposite(this Player player, out Player target)
         {

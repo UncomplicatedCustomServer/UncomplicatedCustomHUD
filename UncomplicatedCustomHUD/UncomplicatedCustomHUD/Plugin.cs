@@ -27,7 +27,7 @@ namespace UncomplicatedCustomHUD
         public override void OnEnabled()
         {
             _harmony = new Harmony($"uncomplicated-custom-hud");
-            _harmony.PatchAll();
+            //_harmony.PatchAll();
 
             Instance = this;
 
